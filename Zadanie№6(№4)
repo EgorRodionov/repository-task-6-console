@@ -1,0 +1,82 @@
+using System;
+
+namespace Zadanie_6__4_
+{
+    class Program
+    {
+        static int [][] Input()
+        {
+            Console.WriteLine("Введите размерность массива:");
+            Console.Write("n = ");
+            int n = int.Parse(Console.ReadLine());
+            int[][] a = new int[n][];
+            for(int i = 0; i < n; ++i)
+            {
+                a[i] = new int[n];
+                for(int j = 0; j < n; ++j)
+                {
+                    Console.Write($"a[{i}][{j}] = ");
+                    a[i][j] = int.Parse(Console.ReadLine());
+                }
+            }
+            return a;
+        }
+
+        static void Print1(int [] a)
+        {
+            for (int i = 0; i < a.Length; ++i)
+                Console.Write($"{a[i]}");
+        }
+
+        static void Print2(int [][] a)
+        {
+            for(int i = 0; i < a.Length; ++i, Console.WriteLine())
+            {
+                for(int j = 0; j < a[i].Length; ++j)
+                {
+                    Console.Write("{0,5} ", a[i][j]);
+                }
+            }
+        }
+
+        static int [] Func(int num, int [][] array) //подсчитывает количество элементов, больших заданного числа
+        {
+            int[] res = new int[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                int count = 0;
+                for (int j = 0; j < array[i].Length; j++)
+                {
+                    if (array[i][j] > num)
+                    {
+                        count++;
+
+                    }
+                    res[i] = count;
+                }
+            }
+            return res;
+        }
+
+        static void Main(string[] args)
+        {
+            try
+            {
+                int[][] myArray = Input();
+                Console.WriteLine("Исходный массив:");
+                Print2(myArray);
+                int[] rez = new int[myArray.Length];
+                Console.WriteLine("Введите число: ");
+                int num = int.Parse(Console.ReadLine());
+                rez = Func(num, myArray);
+                Console.WriteLine("Новый массив:");
+                Console.WriteLine("количество элементов, больших заданного числа:");
+                Print1(rez);
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("Ошибка! Введите размерность массива больше нуля");
+            }
+        }
+    }
+}
