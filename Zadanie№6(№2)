@@ -1,0 +1,75 @@
+using System;
+
+namespace Zadanie_6__2_
+{
+    class Program
+    {
+        static int [] Input()
+        {
+            Console.WriteLine("Введите размерность массива:");
+            int n = int.Parse(Console.ReadLine());
+            int[] a = new int[n];
+            for(int i = 0; i < n; ++i)
+            {
+                Console.Write($"a[{i}] = ");
+                a[i] = int.Parse(Console.ReadLine());
+            }
+            return a;
+        }
+
+        
+
+        static void Main(string[] args)
+        {
+            try
+            {
+                int[] myArray = Input();
+                Console.WriteLine("Исходный массив:");
+                int min = myArray[0];
+                foreach (int elem in myArray)
+                    if (elem < min)
+                        min = elem;
+
+                int max = myArray[0];
+                foreach (int elem in myArray)
+                    if (elem > max)
+                        max = elem;
+
+                int MinIndex = 0;
+                int MaxIndex = 0;
+
+                for (int i = 0; i < myArray.Length; ++i)
+                {
+                    if (myArray[i] == min)
+                        MinIndex = i;
+                    if (myArray[i] == max)
+                        MaxIndex = i;
+                }
+
+                if (MinIndex < MaxIndex)
+                {
+                    for (int i = MinIndex; i <= MaxIndex; i++)
+                        Console.Write(myArray[i] + " ");
+                }
+                else
+                {
+                    Console.WriteLine("Максимальный элемент встречается похже минимального.");
+                    for (int i = MaxIndex; i <= MinIndex; i++)
+                        Console.Write(myArray[i] + " ");
+                }
+                Console.WriteLine();
+
+                int summa = 0;
+                for (int i = MinIndex + 1; i < MaxIndex; i++)
+                {
+                    summa += myArray[i];
+                }
+                Console.WriteLine("Сумма элементов, расположенных между максимальным и минимальным элементами = " + summa);
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("Ошибка! Введите размерность массива больше нуля");
+            }
+        }
+    }
+}
